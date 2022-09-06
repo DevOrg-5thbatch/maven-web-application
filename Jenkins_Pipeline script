@@ -1,0 +1,35 @@
+ode{
+    
+def MavenHome=tool name:"Maven_3.8.6"
+    
+    
+   stage('Soucre code-Github'){
+      git credentialsId: 'f84a40b7-2759-4458-9f14-7508386b03a0', url: 'https://github.com/DevOrg-5thbatch/maven-web-application.git' 
+   }
+    
+    stage('Build-Maven'){
+    sh "${MavenHome}/bin/mvn clean package"  
+    }
+    
+    stage('Deploying into sonar')
+    {
+    sh "${MavenHome}/bin/mvn sonar:sonar"
+    }
+
+    stage('Deploying into nexus')
+    {
+    Sh "${MavenHome}/bin/mvn clean deploy"
+    }
+    
+    stage('deploying into tomcat'){
+    
+    sshagent(['ac96a725-0421-4b77-90cf-dae523d2ce87']) {
+    sh "scp -o StrictHostKeyChecking=no target/.war ec2-user@44.202.156.186:/opt/apache-tomcat-9.0.58/webapps/"
+    }
+    }
+    stage('email extension')
+    {
+        emailext body: 'Pipeline build sucess for the the release EGG_TMT_1.012', subject: 'Build_ success_EGG_TMT_1.012', to: 'Pathanayubkhan561@gmail.com'
+    }
+    
+}

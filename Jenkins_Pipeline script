@@ -23,7 +23,7 @@ def MavenHome=tool name:"Maven_3.8.6"
     {
     sh "${MavenHome}/bin/mvn sonar:sonar"
     }
-   */
+
     stage('Deploying into nexus')
     {
     Sh "${MavenHome}/bin/mvn clean deploy"
@@ -39,5 +39,5 @@ def MavenHome=tool name:"Maven_3.8.6"
     {
         emailext body: 'Pipeline build sucess for the the release EGG_TMT_1.012', subject: 'Build_ success_EGG_TMT_1.012', to: 'Pathanayubkhan561@gmail.com'
     }
-    
+      */
 }

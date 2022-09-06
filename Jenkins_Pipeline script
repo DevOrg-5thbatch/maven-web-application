@@ -1,4 +1,4 @@
-ode{
+node{
     
 def MavenHome=tool name:"Maven_3.8.6"
     

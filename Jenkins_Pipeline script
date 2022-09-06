@@ -18,11 +18,12 @@ def MavenHome=tool name:"Maven_3.8.6"
     sh "${MavenHome}/bin/mvn clean package"  
     }
     
+    /*
     stage('Deploying into sonar')
     {
     sh "${MavenHome}/bin/mvn sonar:sonar"
     }
-
+   */
     stage('Deploying into nexus')
     {
     Sh "${MavenHome}/bin/mvn clean deploy"

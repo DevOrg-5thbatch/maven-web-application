@@ -2,7 +2,14 @@ node{
     
 def MavenHome=tool name:"Maven_3.8.6"
     
-    
+    echo "GitHub BranhName ${env.BRANCH_NAME}"
+      echo "Jenkins Job Number ${env.BUILD_NUMBER}"
+      echo "Jenkins Node Name ${env.NODE_NAME}"
+  
+      echo "Jenkins Home ${env.JENKINS_HOME}"
+      echo "Jenkins URL ${env.JENKINS_URL}"
+      echo "JOB Name ${env.JOB_NAME}"
+      
    stage('Soucre code-Github'){
       git credentialsId: 'f84a40b7-2759-4458-9f14-7508386b03a0', url: 'https://github.com/DevOrg-5thbatch/maven-web-application.git' 
    }
